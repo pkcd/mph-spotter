@@ -99,12 +99,7 @@ public class RamSpotFile {
 		return Arrays.copyOfRange(spotsData, fromOffset, toOffset);
 	}
 
-	public void dumpSpotFile(File spots, File output, File offsets) {
-		dumpSpotFile(new SpotMinimalPerfectHash.SpotIterable(spots), output,
-				offsets);
-	}
-
-	private void dumpSpotFile(Iterable<String> spots, File output, File offsets) {
+	public void dumpSpotFile(Iterable<String> spots, File output, File offsets) {
 		long offset = 0;
 		int currentChunk = 0;
 		FileOutputStream outputWriter = null;

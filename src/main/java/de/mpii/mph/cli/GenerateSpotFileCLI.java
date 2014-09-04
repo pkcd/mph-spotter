@@ -44,10 +44,10 @@ public class GenerateSpotFileCLI {
 		tmp.deleteOnExit();
 		// inputPath.deleteOnExit();
 		RamSpotFile spotFile = new RamSpotFile();
-		spotFile.dumpSpotFile(inputPath, outputPath, tmp);
-		SpotEliasFanoOffsets offsets = new SpotEliasFanoOffsets()
-				.generateEliasFanoFile(tmp.getAbsolutePath());
-		offsets.dump(efPath);
-
+//		spotFile.dumpSpotFile(inputPath, outputPath, tmp);
+//		SpotEliasFanoOffsets offsets = new SpotEliasFanoOffsets()
+//				.generateEliasFanoFile(tmp.getAbsolutePath());
+//		offsets.dump(efPath);
+//
 	}
 }

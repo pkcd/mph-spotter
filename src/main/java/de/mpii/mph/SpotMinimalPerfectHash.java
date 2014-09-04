@@ -49,8 +49,7 @@ public class SpotMinimalPerfectHash {
 		return mph.getLong(spot);
 	}
 
-	public SpotMinimalPerfectHash generateHash(File spotFile) {
-		SpotIterable iterator = new SpotIterable(spotFile);
+	public SpotMinimalPerfectHash generateHash(Iterable<String> iterator) {
 
 		try {
 			MinimalPerfectHashFunction.Builder<String> builder = new MinimalPerfectHashFunction.Builder<String>();
@@ -65,9 +64,8 @@ public class SpotMinimalPerfectHash {
 		return this;
 	}
 
-	public void dumpSpotsAndHash(File spotFile, File output) {
+	public void dumpSpotsAndHash(Iterable<String> iterator, File output) {
 		logger.info("output spots in {}", output.getAbsolutePath());
-		SpotIterable iterator = new SpotIterable(spotFile);
 		BufferedWriter writer = IOUtils.getPlainOrCompressedUTF8Writer(output
 				.getAbsolutePath());
 		for (String spot : iterator) {
@@ -107,57 +105,6 @@ public class SpotMinimalPerfectHash {
 		mph = (MinimalPerfectHashFunction<String>) serializer.load(file
 				.getAbsolutePath());
 		return this;
-
-	}
-
-	public static class SpotIterable implements Iterable<String> {
-
-		File spotFile;
-
-		public SpotIterable(File spotFile) {
-			this.spotFile = spotFile;
-		}
-
-		public Iterator<String> iterator() {
-			return new SpotIterator(spotFile);
-		}
-
-	}
-
-	private static class SpotIterator implements Iterator<String> {
-		BufferedReader br = null;
-		String nextLine = null;
-
-		public SpotIterator(File spotFile) {
-			br = IOUtils.getPlainOrCompressedUTF8Reader(spotFile
-					.getAbsolutePath());
-			try {
-				nextLine = br.readLine();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		public boolean hasNext() {
-			return nextLine != null;
-		}
-
-		public String next() {
-			Scanner scanner = new Scanner(nextLine).useDelimiter("\t");
-			String next = scanner.next();
-			try {
-				nextLine = br.readLine();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			return next;
-		}
-
-		public void remove() {
-			throw new UnsupportedOperationException();
-		}
 
 	}
 

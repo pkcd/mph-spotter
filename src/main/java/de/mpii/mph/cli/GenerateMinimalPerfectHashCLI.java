@@ -1,6 +1,10 @@
 package de.mpii.mph.cli;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -15,7 +19,7 @@ import de.mpii.mph.SpotMinimalPerfectHash;
  * 
  */
 public class GenerateMinimalPerfectHashCLI {
-	public static void main(String[] args) throws ParseException {
+	public static void main(String[] args) throws ParseException, IOException {
 		Options options = new Options();
 		options.addOption("i", "input", true,
 				"UTF-8 file with one 'name<TAB>id' pair per line");
@@ -25,7 +29,7 @@ public class GenerateMinimalPerfectHashCLI {
 		// "Threshold to use for truncating tokens to prefix");
 		CommandLineParser parser = new PosixParser();
 		CommandLine cmd = parser.parse(options, args);
-		File inputPath = new File(cmd.getOptionValue("i"));
+		InputStream spotStream = Files.newInputStream(Paths.get(cmd.getOptionValue("i")));
 		File outputDir = new File(cmd.getOptionValue("o"));
 		if (!outputDir.exists()) {
 			outputDir.mkdir();
@@ -37,10 +41,11 @@ public class GenerateMinimalPerfectHashCLI {
 		System.out.println("mphPath = " + mphPath);
 		System.out.println("outputPath = " + outputPath);
 
-		SpotMinimalPerfectHash mph = new SpotMinimalPerfectHash()
-				.generateHash(inputPath);
-		mph.dumpSpotsAndHash(inputPath, outputPath);
-		mph.dump(mphPath);
+//		SpotMinimalPerfectHash mph = new SpotMinimalPerfectHash()
+//				.generateHash(new SpotIterable(spotStream));
+//		mph.dumpSpotsAndHash(new SpotIterable(spotStream), outputPath);
+//		mph.dump(mphPath);
 
 	}
+	
 }
