@@ -66,7 +66,7 @@ public class RamSpotRepository {
 //		 logger.info("offsetEnd = {} ",to);
 		byte[] binspot = spots.getOffset(from, to);
 		String match = new String(binspot);
-		logger.debug("match =" + match);
+//		logger.debug("match =" + match);
 		if (match.equals(spot))
 			return index;
 		return -1;
