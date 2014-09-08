@@ -23,7 +23,6 @@ import it.unimi.dsi.sux4j.mph.MinimalPerfectHashFunction;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
-import java.util.Iterator;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,6 +94,7 @@ public class SpotMinimalPerfectHash {
 		serializer.dump(mph, outputFile.getAbsolutePath());
 	}
 
+	@SuppressWarnings("unchecked")
 	public SpotMinimalPerfectHash load(File file) {
 		Serializer serializer = new Serializer();
 		logger.info("loading minimal perfect hashing in {} ",
