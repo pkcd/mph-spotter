@@ -27,6 +27,11 @@ public class SpotMinimalPerfectHashTest {
                         return spots[++current];
                     }
 
+					public void remove() {
+						// TODO Auto-generated method stub
+						
+					}
+
                 };
             }
         };
